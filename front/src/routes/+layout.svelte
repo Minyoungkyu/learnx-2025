@@ -122,7 +122,7 @@
   </div>
 </header>
 
-<main class="flex-grow flex flex-col">{@render children()}</main>
+<main class="w-full flex-grow flex flex-col">{@render children()}</main>
 <footer class="w-full bg-white border-t">
   <div class="max-w-6xl mx-auto px-4 md:px-8 py-12">
     <div class="flex flex-col md:flex-row justify-between items-start gap-8">
