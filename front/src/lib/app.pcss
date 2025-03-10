@@ -8,10 +8,10 @@
 
 @font-face {
   font-family: 'Pretendard-Regular';
-  src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff')
-    format('woff');
+  src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
   font-weight: 400;
   font-style: normal;
+  font-display: swap;
 }
 
 html > body {
@@ -56,8 +56,12 @@ body.fullscreen-mode .visible-on-fullscreen {
   left: 50dvw;
 }
 
+.modal {
+  transition: unset;
+}
+
 .flexbox-row {
-    @apply flex flex-row items-center justify-center;
+  @apply flex flex-row items-center justify-center;
 }
 
 .flexbox-col {

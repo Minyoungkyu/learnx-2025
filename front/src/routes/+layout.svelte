@@ -1,7 +1,9 @@
 <script lang="ts">
   import { onMount } from 'svelte';
+  import { writable } from 'svelte/store';
   import { page } from '$app/stores';
   import hotkeys from 'hotkeys-js';
+  import { onDestroy } from 'svelte';
 
   import '$lib/app.pcss';
 
@@ -10,9 +12,38 @@
   const { children } = $props();
 
   onMount(() => {
-    rq.initAuth();
+    // rq.initAuth();
+  });
+
+  let isOverlayVisible = writable(false);
+  let isModalOpen = $state(() => rq.dialogStack.length > 0);
+
+  function disableScroll(e: any) {
+      // 이벤트가 발생한 요소나 그 부모가 모달 내부인지 확인
+      const isModalContent = e.target.closest('.modal-content');
+      if (!isModalContent) {
+          e.preventDefault(); // 모달 외부의 스크롤만 방지
+      }
+  }
+
+  $effect(() => {
+      isOverlayVisible.set(isModalOpen());
+
+      if (isModalOpen()) {    
+          document.addEventListener("wheel", disableScroll, { passive: false });
+          document.addEventListener("touchmove", disableScroll, { passive: false });
+      } else {
+          document.removeEventListener("wheel", disableScroll);
+          document.removeEventListener("touchmove", disableScroll);
+      }
   });
 </script>
+
+<!-- 오버레이 (클릭하면 모달 닫힘) -->
+{#if $isOverlayVisible}
+    <div class="fixed inset-0 bg-black opacity-50 transition-opacity duration-300 z-40">
+    </div>
+{/if}
 
 <header class="navbar bg-base-100 shadow sticky top-0 z-10">
   <div class="flex-none">

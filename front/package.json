@@ -26,7 +26,7 @@
     "@typescript-eslint/eslint-plugin": "^6.0.0",
     "@typescript-eslint/parser": "^6.0.0",
     "autoprefixer": "^10.4.16",
-    "daisyui": "^4.6.0",
+    "daisyui": "^5.0.0",
     "eslint": "^8.56.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-svelte": "^2.36.0-next.4",
@@ -54,6 +54,7 @@
     "aos": "^2.3.4",
     "hotkeys-js": "^3.13.3",
     "openapi-fetch": "^0.8.2",
+    "pdfjs-dist": "^3.11.174",
     "svelte-flow": "^0.0.3",
     "toastr": "^2.1.4"
   }
