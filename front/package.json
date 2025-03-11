@@ -50,11 +50,14 @@
     "@toast-ui/editor-plugin-color-syntax": "^3.1.0",
     "@toast-ui/editor-plugin-table-merged-cell": "^3.1.0",
     "@toast-ui/editor-plugin-uml": "^3.0.1",
+    "@types/ace": "^0.0.52",
     "@xyflow/svelte": "^0.1.29",
+    "ace-builds": "^1.39.0",
     "aos": "^2.3.4",
     "hotkeys-js": "^3.13.3",
     "openapi-fetch": "^0.8.2",
     "pdfjs-dist": "^3.11.174",
+    "svelte-ace": "^1.0.21",
     "svelte-flow": "^0.0.3",
     "toastr": "^2.1.4"
   }

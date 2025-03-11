@@ -1,7 +1,19 @@
 <script lang="ts">
     import rq from "$lib/rq/rq.svelte";
 
-    const { openPDFContentModal, openVideoContentModal, openQuizContentModal, openCLIContentModal, openBoardContentModal, openLinkContentModal } = $props<{ openPDFContentModal: () => void, openVideoContentModal: () => void, openQuizContentModal: () => void, openCLIContentModal: () => void, openBoardContentModal: () => void, openLinkContentModal: () => void }>();
+    const { loadModal } = $props<{
+        loadModal: (type: ModalType) => Promise<any>
+    }>();
+
+    type ModalType = 
+        | 'Lecture'
+        | 'Content'
+        | 'PDFContent'
+        | 'VideoContent'
+        | 'QuizContent'
+        | 'CLIContent'
+        | 'BoardContent'
+        | 'LinkContent';
 
     const id = "ContentModal";
     const title = "콘텐츠 추가";
@@ -10,33 +22,24 @@
     let selectedType = $state('');
 
     const contentTypes = [
-        { id: 'pdf', label: 'PDF', icon: 'fa-regular fa-file-pdf' },
-        { id: 'video', label: '동영상', icon: 'fa-regular fa-circle-play' },
-        { id: 'quiz', label: '퀴즈', icon: 'fa-regular fa-square-check' },
-        { id: 'cli', label: 'CLI실습', icon: 'fa-solid fa-terminal' },
-        { id: 'board', label: '보드', icon: 'fa-regular fa-comments' },
-        { id: 'link', label: '링크', icon: 'fa-solid fa-link' }
+        { id: 'PDF', label: 'PDF', icon: 'fa-regular fa-file-pdf' },
+        { id: 'Video', label: '동영상', icon: 'fa-regular fa-circle-play' },
+        { id: 'Quiz', label: '퀴즈', icon: 'fa-regular fa-square-check' },
+        { id: 'CLI', label: 'CLI실습', icon: 'fa-solid fa-terminal' },
+        { id: 'Board', label: '보드', icon: 'fa-regular fa-comments' },
+        { id: 'Link', label: '링크', icon: 'fa-solid fa-link' }
     ];
 
-    function handleSubmit(event: Event) {
+    async function handleSubmit(event: Event) {
         event.preventDefault();
         if (!selectedType) return;
         
         rq.hideModal(id);
         
-        if (selectedType === 'pdf') {
-            openPDFContentModal();
-        } else if (selectedType === 'video') {
-            openVideoContentModal();
-        } else if (selectedType === 'quiz') {
-            openQuizContentModal();
-        } else if (selectedType === 'cli') {
-            openCLIContentModal();
-        } else if (selectedType === 'board') {
-            openBoardContentModal();
-        } else if (selectedType === 'link') {
-            openLinkContentModal();
-        }
+        // selectedType을 ModalType 형식으로 변환 (Content 접미사 추가)
+        const modalType = selectedType + 'Content' as ModalType;
+        await loadModal(modalType);
+        rq.showModal(`${modalType}Modal`);
     }
 </script>
 

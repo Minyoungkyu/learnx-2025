@@ -1,4 +1,69 @@
-<div class="flex flex-col items-center justify-center">
+<script lang="ts">
+  import rq from '$lib/rq/rq.svelte';
+  import { onMount } from 'svelte';
+  import AOS from 'aos';
+  import 'aos/dist/aos.css';
+
+  onMount(() => {
+    AOS.init({
+      duration: 500,
+      once: true,
+      offset: 50
+    });
+
+    const observerOptions = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.1
+    };
+
+    const startCountAnimation = (element: any) => {
+      const target = parseInt(element.dataset.target);
+      const duration = 2000;
+      const step = (target / duration) * 10;
+      let current = 0;
+
+      const timer = setInterval(() => {
+        current += step;
+        if (current >= target) {
+          element.textContent = target;
+          clearInterval(timer);
+        } else {
+          element.textContent = Math.floor(current);
+        }
+      }, 10);
+    };
+
+    const startBarAnimation = (element: any) => {
+      const targetHeight = element.dataset.height;
+      element.style.height = targetHeight;
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          if (entry.target.classList.contains('counter')) {
+            startCountAnimation(entry.target);
+          }
+          if (entry.target.hasAttribute('data-height')) {
+            startBarAnimation(entry.target);
+          }
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.counter').forEach(counter => {
+      observer.observe(counter);
+    });
+
+    document.querySelectorAll('[data-height]').forEach(bar => {
+      observer.observe(bar);
+    });
+  });
+</script>
+
+<div class="w-full flex flex-col items-center justify-center">
   <section class="flexbox-col w-full h-[calc(100vh-64px)] bg-[#F7FAF4] px-4 text-center">
     <h3 class="text-4xl md:text-5xl lg:text-6xl font-bold text-[#00CA5B]">Learn-X</h3>
     <p class="text-2xl md:text-3xl lg:text-4xl font-bold">AI시대, 배움을 새롭게 디자인하다!</p>
@@ -218,72 +283,13 @@
   <section class="flexbox-col gap-4 w-full h-[calc(100vh)] bg-[#F9FFF3] px-4 text-center">
     <h3 class="text-3xl md:text-4xl font-bold text-[#00CA5B]" data-aos="fade-down">Learn-X</h3>
     <p class="text-4xl md:text-5xl lg:text-6xl font-bold" data-aos="fade-up" data-aos-delay="200">지금 바로 시작해보세요</p>
-    <button class="mt-10 text-white rounded-full bg-[#5DDBDB] hover:bg-[#4BC5C5] transition-colors text-lg md:text-xl font-bold px-6 md:px-8 py-2" data-aos="zoom-in" data-aos-delay="400">시작하기</button>
+    <button 
+      onclick={() => rq.goTo('/class')}
+      class="mt-10 text-white rounded-full bg-[#5DDBDB] hover:bg-[#4BC5C5] transition-colors text-lg md:text-xl font-bold px-6 md:px-8 py-2" data-aos="zoom-in" data-aos-delay="400">
+      시작하기
+    </button>
   </section>
 
 </div>
 
-<script lang="ts">
-  import { onMount } from 'svelte';
-  import AOS from 'aos';
-  import 'aos/dist/aos.css';
-
-  onMount(() => {
-    AOS.init({
-      duration: 500,
-      once: true,
-      offset: 50
-    });
-
-    const observerOptions = {
-      root: null,
-      rootMargin: '0px',
-      threshold: 0.1
-    };
-
-    const startCountAnimation = (element: any) => {
-      const target = parseInt(element.dataset.target);
-      const duration = 2000;
-      const step = (target / duration) * 10;
-      let current = 0;
-
-      const timer = setInterval(() => {
-        current += step;
-        if (current >= target) {
-          element.textContent = target;
-          clearInterval(timer);
-        } else {
-          element.textContent = Math.floor(current);
-        }
-      }, 10);
-    };
-
-    const startBarAnimation = (element: any) => {
-      const targetHeight = element.dataset.height;
-      element.style.height = targetHeight;
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          if (entry.target.classList.contains('counter')) {
-            startCountAnimation(entry.target);
-          }
-          if (entry.target.hasAttribute('data-height')) {
-            startBarAnimation(entry.target);
-          }
-          observer.unobserve(entry.target);
-        }
-      });
-    }, observerOptions);
-
-    document.querySelectorAll('.counter').forEach(counter => {
-      observer.observe(counter);
-    });
-
-    document.querySelectorAll('[data-height]').forEach(bar => {
-      observer.observe(bar);
-    });
-  });
-</script>
 

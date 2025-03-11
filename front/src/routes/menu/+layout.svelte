@@ -1,5 +1,5 @@
 <script lang="ts">
-    import SideMenu from "../menu/sideMenu.svelte";
+    import SideMenu from "./sideMenu.svelte";
 </script>
 
 <div class="w-full flex flex-row adm-area">

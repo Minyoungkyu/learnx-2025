@@ -1,4 +1,4 @@
-<script lang="ts">
+<!-- <script lang="ts">
     import SideMenu from "../menu/sideMenu.svelte";
 </script>
 
@@ -11,4 +11,4 @@
             <slot></slot>
         </div>
     </div>
-</div>
+</div> -->
