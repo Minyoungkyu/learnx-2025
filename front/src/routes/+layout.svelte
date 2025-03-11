@@ -5,6 +5,8 @@
   import hotkeys from 'hotkeys-js';
   import { onDestroy } from 'svelte';
 
+  import SideMenu from "$lib/components/SideMenu.svelte";
+
   import '$lib/app.pcss';
 
   import rq from '$lib/rq/rq.svelte';
@@ -14,6 +16,12 @@
   onMount(() => {
     // rq.initAuth();
   });
+
+  let backgroundColor:string = $state('bg-base-100');
+
+  let needHeader:boolean = $state(false);
+  let needSideMenu:boolean = $state(false);
+  let needFooter:boolean = $state(false);
 
   let isOverlayVisible = writable(false);
   let isModalOpen = $state(() => rq.dialogStack.length > 0);
@@ -36,6 +44,33 @@
           document.removeEventListener("wheel", disableScroll);
           document.removeEventListener("touchmove", disableScroll);
       }
+
+      const path = $page.url.pathname;
+
+      if (path.startsWith('/menu')) {
+        backgroundColor = 'bg-gray-100';
+      } else {
+        backgroundColor = 'bg-base-100';
+      }
+
+      if (path.startsWith('/learn')) {
+        needHeader = false;
+      } else {
+        needHeader = true;
+      }
+
+      if (path == '/' || path == '/class' || path == '/learn' || path == '/learn2') {
+        needSideMenu = false;
+      } else {
+        needSideMenu = true;
+      }
+
+      if (path == '/') {
+        needFooter = true;
+      } else {
+        needFooter = false;
+      }
+
   });
 </script>
 
@@ -45,115 +80,91 @@
     </div>
 {/if}
 
-<header class="navbar bg-base-100 shadow sticky top-0 z-10">
+{#if needHeader}
+<header class="navbar flex justify-center sticky p-4 top-0 z-10 h-12 {backgroundColor}">
   <div class="flex-none">
-    <div class="dropdown">
-      <div tabindex="0" role="button" class="btn btn-ghost btn-circle">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          class="h-5 w-5"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-          ><path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M4 6h16M4 12h16M4 18h7"
-          /></svg
-        >
-      </div>
-      <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
-      <ul
-        tabindex="0"
-        class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
-      >
-        <li><a href="/p/list"><i class="fa-solid fa-list"></i> 글</a></li>
-        {#if rq.isLogin()}
-          <li><a href="/p/mine"><i class="fa-solid fa-list-check"></i> 내 글</a></li>
-          <li>
-            <button onclick={() => rq.goToTempPostEditPage()}>
-              <i class="fa-solid fa-pen"></i> 글 쓰기
-            </button>
-          </li>
-          <li>
-            <a href="/ken/migrate">
-              <i class="fa-solid fa-cloud-arrow-down"></i> 기존 글 복구
-            </a>
-          </li>
-        {/if}
-
-        {#if rq.isAdmPage($page)}
-          <li><a href="/"><i class="fa-solid fa-house"></i> 홈</a></li>
-        {/if}
-
-        {#if rq.isUsrPage($page) && rq.isAdmin()}
-          <li><a href="/adm"><i class="fa-solid fa-gauge"></i> 관리자</a></li>
-        {/if}
-      </ul>
+    <div class="flex items-start gap-2 cursor-pointer" onclick={() => rq.goTo('/')}>
+      <img src="/images/learnx_logo.png" alt="LearnX" class="w-38 h-8" />
     </div>
   </div>
 
-  <div class="flex-1">
-    {#if rq.isUsrPage($page)}
-      <a href="/" class="btn btn-ghost text-md">LEARNX</a>
-    {/if}
-    {#if rq.isAdmPage($page)}
-      <a href="/adm" class="btn btn-ghost text-md">LEARNX ADMIN</a>
-    {/if}
+  <div class="flex w-full justify-center">
+    <div class="w-fit flex items-center justify-center gap-2 text-sm font-bold bg-gray-200 rounded-full px-2 py-1">
+      <a href="/" class="px-2 py-1 rounded-full hover:bg-gray-100 {$page.url.pathname === '/' ? 'bg-white' : ''}">홈</a>
+      <a href="/class" class="px-2 py-1 rounded-full hover:bg-gray-100 {$page.url.pathname === '/class' || $page.url.pathname.startsWith('/menu/lecture') ? 'bg-white' : ''}">클래스</a>
+      <a href="/coding" class="px-2 py-1 rounded-full hover:bg-gray-100 {$page.url.pathname === '/coding' ? 'bg-white' : ''}">코딩 챌린지</a>
+    </div>
   </div>
 
   <div class="flex-none">
     <div class="dropdown dropdown-end">
-      {#if rq.isLogout()}
-        <button class="btn btn-square btn-ghost">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            class="inline-block w-5 h-5 stroke-current"
-            ><path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z"
-            ></path></svg
-          >
-        </button>
-      {/if}
-      {#if rq.isLogin()}
-        <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
-          <div class="w-10 rounded-full">
-            <img src={rq.member.profileImgUrl} alt="" />
-          </div>
+      <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
+        <div class="w-10 rounded-full">
+          <img
+            alt="프로필 이미지"
+            src="/images/profile_sample.png" />
         </div>
-      {/if}
-      <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
+      </div>
       <ul
         tabindex="0"
-        class="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52"
-      >
-        {#if rq.isLogout()}
-          <li>
-            <a href="/member/login"><i class="fa-solid fa-right-to-bracket"></i> 로그인 & 가입</a>
-          </li>
-        {/if}
-        {#if rq.isLogin()}
-          <li>
-            <a href="/member/me"><i class="fa-solid fa-user"></i> {rq.member.name}</a>
-          </li>
-          <li>
-            <button onclick={() => rq.logoutAndRedirect('/')}>
-              <i class="fa-solid fa-right-from-bracket"></i> 로그아웃
-            </button>
-          </li>
-        {/if}
+        class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
+        <li>
+          <div class="flex items-center gap-2 py-2">
+            <div class="w-12 rounded-full">
+              <img
+              alt="프로필 이미지"
+              src="/images/profile_sample.png" />
+            </div>
+            <div class="flex flex-col items-start justify-center">
+              <span class="text-lg font-bold">TestUser</span>
+              <span>학생</span>
+            </div>
+          </div>
+        </li>
+        <div class="divider my-0"></div>
+        <li>
+          <div class="flex gap-2 items-center">
+            <div class="flex items-center gap-1">
+              <span class="text-gray-500">레벨</span>
+              <span class="text-sm font-bold">1</span>
+            </div>
+            <div class="w-[1px] h-3 bg-gray-300"></div>
+            <div class="flex items-center gap-1">
+              <span class="text-gray-500 font-bold">포인트</span>
+              <span class="text-sm font-bold">1200 P</span>
+            </div>
+          </div>
+        </li>
+        <div class="divider my-0"></div>
+        <li>
+          <a class="px-4 py-2 text-md">
+            <i class="fa-solid fa-chalkboard-user"></i>
+            <span>내 학습</span>
+          </a>
+        </li>
+        <li>
+          <a class="px-4 py-2 text-md">
+            <i class="fa-solid fa-right-from-bracket"></i>
+            <span>로그아웃</span>
+          </a>
+        </li>
       </ul>
     </div>
   </div>
 </header>
+{/if}
 
-<main class="w-full flex-grow flex flex-col">{@render children()}</main>
+
+<main class="w-full flex flex-row">
+  {#if needSideMenu}
+    <div class="w-[250px] sideMenuContainer">
+      <SideMenu />
+    </div>
+  {/if}
+  {@render children()}
+</main>
+
+{#if needFooter}
 <footer class="w-full bg-white border-t">
   <div class="max-w-6xl mx-auto px-4 md:px-8 py-12">
     <div class="flex flex-col md:flex-row justify-between items-start gap-8">
@@ -193,3 +204,15 @@
     </div>
   </div>
 </footer>
+{/if}
+
+<style>
+  .menu {
+    --menu-active-fg: unset;
+    --menu-active-bg: unset;
+  }
+
+  .menu li *:hover {
+    background-color: white;
+  }
+</style>

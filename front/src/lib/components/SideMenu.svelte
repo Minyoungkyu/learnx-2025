@@ -3,7 +3,7 @@
     import { goto } from '$app/navigation';
 
     const menuItems = [
-        { icon: 'fa-home', text: '메인', path: '/menu/main' },
+        { icon: 'fa-home', text: '메인', path: '/class' },
         { icon: 'fa-book', text: '차시 목록', path: '/menu/lecture', active: true },
         { icon: 'fa-chart-line', text: '학습 현황', path: '/class' },
         { icon: 'fa-robot', text: 'AI퍼스널리포트', path: '/class' },

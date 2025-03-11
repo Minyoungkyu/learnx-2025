@@ -1,4 +1,6 @@
-<script>
+<script lang="ts">
+  import rq from "$lib/rq/rq.svelte";
+
   let lectureTitle = "발 맞추어 천천히 따라가는 중학생 기초 파이썬";
   let progress = 15;
 
@@ -80,7 +82,7 @@
   /**
      * @param {string} title
      */
-  function truncateTitle(title, maxLength = 25) {
+  function truncateTitle(title: string, maxLength = 25) {
     return title.length > maxLength 
       ? title.slice(0, maxLength) + '...'
       : title;
@@ -93,7 +95,7 @@
   /**
      * @param {number} index
      */
-  function handleLectureSelect(index) {
+  function handleLectureSelect(index: number) {
     selectedLectureIndex = index;
   }
 
@@ -106,7 +108,7 @@
      * @param {number} index
      * @param {Event} event
      */
-  function toggleLectureMenu(index, event) {
+  function toggleLectureMenu(index: number, event: Event) {
     event.stopPropagation();  // 차시 클릭 이벤트 전파 방지
     openLectureMenu = openLectureMenu === index ? -1 : index;
     openContentMenu = { lectureIndex: -1, contentIndex: -1 };  // 다른 메뉴 닫기
@@ -117,7 +119,7 @@
      * @param {number} contentIndex
      * @param {Event} event
      */
-  function toggleContentMenu(lectureIndex, contentIndex, event) {
+  function toggleContentMenu(lectureIndex: number, contentIndex: number, event: Event) {
     event.stopPropagation();  // 상위 요소 클릭 이벤트 전파 방지
     openContentMenu = openContentMenu.lectureIndex === lectureIndex && openContentMenu.contentIndex === contentIndex
       ? { lectureIndex: -1, contentIndex: -1 }
@@ -156,12 +158,59 @@
     // TODO: 차시 추가 로직 구현
     closeAddLectureModal();
   }
+
+  // 모달 타입 정의
+  type ModalType = 
+    | 'Lecture'
+    | 'Content'
+    | 'PDFContent'
+    | 'VideoContent'
+    | 'QuizContent'
+    | 'CLIContent'
+    | 'BoardContent'
+    | 'LinkContent';
+
+  // 모달 컴포넌트 저장 객체
+  let modalComponents: Partial<Record<ModalType, any>> = {};
+
+  // 제네릭 모달 로드 함수
+  async function loadModal(type: ModalType) {
+    if (!modalComponents[type]) {
+      const module = await import(`$lib/components/${type}Modal.svelte`);
+      modalComponents[type] = module.default;
+    }
+    return modalComponents[type];
+  }
+
+  // 제네릭 모달 오픈 함수
+  async function openModal(type: ModalType) {
+    if (!modalComponents[type]) {
+      await loadModal(type);
+    }
+    rq.showModal(`${type}Modal`);
+  }
+
+  // Content 모달 오픈 시 필요한 props
+  async function openContentModal() {
+    await openModal('Content');
+    if (modalComponents.Content) {
+      const props = {
+        openPDFContentModal: () => openModal('PDFContent'),
+        openVideoContentModal: () => openModal('VideoContent'),
+        openQuizContentModal: () => openModal('QuizContent'),
+        openCLIContentModal: () => openModal('CLIContent'),
+        openBoardContentModal: () => openModal('BoardContent'),
+        openLinkContentModal: () => openModal('LinkContent')
+      };
+      return props;
+    }
+  }
 </script>
 
 
 <!-- svelte-ignore a11y_click_events_have_key_events -->
 <!-- svelte-ignore a11y_no_static_element_interactions -->
-<div class="bg-gray-100 w-full h-full" on:click={handleGlobalClick}>
+<div class="bg-gray-100 w-full h-full" onclick={handleGlobalClick}>
   <div class="w-[1000px] mx-auto px-4 py-8">
     <!-- 타이틀과 구분선 -->
     <div class="mb-8">
@@ -174,7 +223,7 @@
           </button>
           <button 
             class="flex items-center gap-2 px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors duration-150"
-            on:click={openAddLectureModal}
+            onclick={() => openModal('Lecture')}
           >
             <i class="fas fa-plus"></i>
             <span>차시 추가</span>
@@ -191,7 +240,7 @@
         <!-- svelte-ignore a11y_click_events_have_key_events -->
         <!-- svelte-ignore a11y_no_static_element_interactions -->
         <div class="rounded-xl outline outline-2 outline-gray-200 shadow-md p-6 mb-4 cursor-pointer bg-white"
-             on:click={() => handleLectureSelect(index)}>
+             onclick={() => handleLectureSelect(index)}>
           <div class="flex items-center justify-between">
             <div class="flex items-center gap-3">
               <span class="bg-cyan-500 text-white px-3 py-1 rounded-md text-sm font-bold">
@@ -211,14 +260,13 @@
                 <!-- svelte-ignore a11y_consider_explicit_label -->
                 <button 
                   class="p-2 hover:bg-gray-100 rounded-full"
-                  on:click={(e) => toggleLectureMenu(index, e)}
+                  onclick={(e) => toggleLectureMenu(index, e)}
                 >
                   <i class="fas fa-ellipsis-v text-gray-600"></i>
                 </button>
                 {#if openLectureMenu === index}
                   <div 
                     class="absolute right-0 mt-2 w-32 bg-white rounded-lg shadow-lg border border-gray-200 z-10"
-                    on:click|stopPropagation
                   >
                     <button class="w-full text-left px-4 py-2 hover:bg-gray-50 rounded-t-lg">
                       <i class="fas fa-edit mr-2"></i>수정
@@ -267,14 +315,13 @@
                     <!-- svelte-ignore a11y_consider_explicit_label -->
                     <button 
                       class="p-2 hover:bg-gray-100 rounded-full"
-                      on:click={(e) => toggleContentMenu(index, contentIndex, e)}
+                      onclick={(e) => toggleContentMenu(index, contentIndex, e)}
                     >
                       <i class="fas fa-ellipsis-v text-gray-600"></i>
                     </button>
                     {#if openContentMenu.lectureIndex === index && openContentMenu.contentIndex === contentIndex}
                       <div 
                         class="absolute right-0 mt-2 w-32 bg-white rounded-lg shadow-lg border border-gray-200 z-10"
-                        on:click|stopPropagation
                       >
                         <button class="w-full text-left px-4 py-2 hover:bg-gray-50 rounded-t-lg">
                           <i class="fas fa-edit mr-2"></i>수정
@@ -290,7 +337,10 @@
               
               <!-- 콘텐츠 추가 버튼 -->
               <div class="mt-4 flex justify-center">
-                <button class="flex items-center gap-2 px-4 py-2 text-sm bg-white rounded-lg border border-gray-200 hover:bg-gray-50 transition-colors duration-150">
+                <button 
+                  onclick={openContentModal}
+                  class="flex items-center gap-2 px-4 py-2 text-sm bg-white rounded-lg border border-gray-200 hover:bg-gray-50 transition-colors duration-150"
+                >
                   <i class="fas fa-plus text-gray-600"></i>
                   <span>콘텐츠 추가</span>
                 </button>
@@ -300,72 +350,15 @@
         </div>
       {/each}
     </div>
-
-    <!-- 차시 추가 팝업 -->
-    {#if isAddLectureModalOpen}
-      <!-- 모달 배경 -->
-      <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50" on:click|self={closeAddLectureModal}>
-        <!-- 모달 컨테이너 -->
-        <div class="bg-white rounded-lg w-[500px] p-6">
-          <!-- 모달 헤더 -->
-          <div class="flex items-center justify-between mb-6">
-            <h2 class="text-xl font-bold">차시 추가</h2>
-            <!-- svelte-ignore a11y_consider_explicit_label -->
-            <button 
-              class="text-gray-500 hover:text-gray-700"
-              on:click={closeAddLectureModal}
-            >
-              <i class="fas fa-times text-xl"></i>
-            </button>
-          </div>
-
-          <!-- 모달 콘텐츠 -->
-          <div class="space-y-4">
-            <!-- 차시 명 -->
-            <div>
-              <label class="block text-sm font-bold mb-2" for="lecture-title">
-                차시 명
-              </label>
-              <input
-                type="text"
-                id="lecture-title"
-                class="w-full p-2 border border-gray-300 rounded-lg"
-                placeholder="차시 명을 입력하세요."
-                bind:value={newLectureData.title}
-              />
-            </div>
-
-            <!-- 차시 설명 -->
-            <div>
-              <label class="block text-sm font-bold mb-2" for="lecture-description">
-                차시 설명
-              </label>
-              <textarea
-                id="lecture-description"
-                class="w-full p-2 border border-gray-300 rounded-lg h-32 resize-none"
-                placeholder="차시 설명을 입력하세요."
-                bind:value={newLectureData.description}
-              ></textarea>
-            </div>
-          </div>
-
-          <!-- 모달 푸터 -->
-          <div class="flex justify-end gap-2 mt-6">
-            <button 
-              class="px-4 py-2 text-gray-600 hover:bg-gray-100 rounded-lg"
-              on:click={closeAddLectureModal}
-            >
-              취소
-            </button>
-            <button 
-              class="px-4 py-2 bg-cyan-500 text-white rounded-lg hover:bg-cyan-600"
-              on:click={handleAddLecture}
-            >
-              만들기
-            </button>
-          </div>
-        </div>
-      </div>
-    {/if}
   </div>
 </div>
+
+<!-- 모달 컴포넌트 렌더링 -->
+{#each Object.entries(modalComponents) as [type, Component]}
+  {#if Component}
+    <svelte:component 
+      this={Component} 
+      {...type === 'Content' ? { loadModal } : {}} 
+    />
+  {/if}
+{/each}
