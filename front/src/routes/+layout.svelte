@@ -157,7 +157,7 @@
 
 <main class="w-full flex flex-row">
   {#if needSideMenu}
-    <div class="w-[250px] sideMenuContainer">
+    <div class="w-[250px] min-w-[250px] sideMenuContainer">
       <SideMenu />
     </div>
   {/if}
