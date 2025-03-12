@@ -1,5 +1,6 @@
 <script>
   import { goto } from '$app/navigation';
+  import rq from '$lib/rq/rq.svelte';
 
   let classTitle = "발 맞춰서 천천히 따라가는 중학생 기초 파이썬";
   let progress = 15;
@@ -134,7 +135,7 @@
    */
   function handleStudyClick(event) {
     event.stopPropagation(); // 상위 요소 클릭 이벤트 전파 방지
-    goto('/menu/lecture'); // 학습 페이지로 이동
+    rq.goTo('/learn'); // 학습 페이지로 이동
   }
 
   /**
@@ -146,7 +147,7 @@
   }
 </script>
 
-<div class="bg-gray-100 w-full">
+<div class="w-full">
   <div class="max-w-4xl mx-auto px-4 py-8">
     <!-- 상단 클래스 정보 타이틀 -->
     <div class="mb-6">

@@ -87,7 +87,7 @@
         </div>
       </div>
 
-      <button class="w-full mt-6 py-2.5 bg-gray-300 text-white rounded font-medium">
+      <button class="w-full mt-6 py-2.5 bg-gray-300 text-white rounded font-medium" onclick={() => rq.goTo('/')}>
         가입하기
       </button>
     </div>

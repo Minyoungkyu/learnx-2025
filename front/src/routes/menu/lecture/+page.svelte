@@ -206,10 +206,9 @@
   }
 </script>
 
-
 <!-- svelte-ignore a11y_click_events_have_key_events -->
 <!-- svelte-ignore a11y_no_static_element_interactions -->
-<div class="bg-gray-100 w-full h-full" onclick={handleGlobalClick}>
+<div class="w-full h-full" onclick={handleGlobalClick}>
   <div class="w-[1000px] mx-auto px-4 py-8">
     <!-- 타이틀과 구분선 -->
     <div class="mb-8">
@@ -285,7 +284,7 @@
           <div class="border-b border-gray-200 pt-4 mb-4"></div>
             <div class="space-y-1">
               {#each lecture.contents as content, contentIndex}
-                <div class="bg-white p-1 flex items-center gap-4 hover:bg-cyan-100 transition-colors duration-150 rounded-lg cursor-pointer">
+                <div class="bg-white p-1 flex items-center gap-4 hover:bg-cyan-100 transition-colors duration-150 rounded-lg cursor-pointer" onclick={() => rq.goTo('/learn')}>
                   <!-- 차시 아이콘 -->
                   <div class="bg-gray-50 rounded-lg p-2 flex items-center justify-center w-12 h-12">
                     {#if content.type === 'video'}

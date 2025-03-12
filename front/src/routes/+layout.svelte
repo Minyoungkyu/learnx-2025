@@ -81,7 +81,7 @@
 {/if}
 
 {#if needHeader}
-<header class="navbar flex justify-center sticky p-4 top-0 z-10 h-12 {backgroundColor}">
+<header class="navbar flex justify-center sticky p-4 top-0 z-10 h-12 bg-white">
   <div class="flex-none">
     <div class="flex items-start gap-2 cursor-pointer" onclick={() => rq.goTo('/')}>
       <img src="/images/learnx_logo.png" alt="LearnX" class="w-38 h-8" />
@@ -97,6 +97,9 @@
   </div>
 
   <div class="flex-none">
+    <div class="btn bg-[#5DDBDB] rounded-lg text-white mr-6" onclick={() => rq.goTo('/member/join')}>
+      회원가입
+    </div>
     <div class="dropdown dropdown-end">
       <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
         <div class="w-10 rounded-full">

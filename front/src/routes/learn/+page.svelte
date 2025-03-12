@@ -3,6 +3,7 @@
     import { setupAceEditor } from "$lib/aceEdit/aceEditorSetup.svelte";
     import { onMount } from "svelte";
     import Resizer from "$lib/components/Resizer.svelte";
+    import rq from '$lib/rq/rq.svelte';
 
     let editor: any;
 
@@ -113,7 +114,7 @@
                         <div class="flex items-center gap-2">
                             <span class="text-white">1/10</span>
                         </div>
-                        <button class="px-4 py-2 text-white rounded bg-[#4FC0D3] hover:bg-[#45AAB9] transition-colors">
+                        <button class="px-4 py-2 text-white rounded bg-[#4FC0D3] hover:bg-[#45AAB9] transition-colors" onclick={() => rq.goTo('/learn2')}>
                             다음 <i class="fa-solid fa-angle-right"></i>
                         </button>
                     </div>
