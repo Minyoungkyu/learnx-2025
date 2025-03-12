@@ -4,79 +4,78 @@
   let lectureTitle = "발 맞추어 천천히 따라가는 중학생 기초 파이썬";
   let progress = 15;
 
-  let lectureList = [{
-    title: "프로그램과 프로그래밍 언어, 출력과 순차구조",
-    progress: 100,
-    contents: [
+  // 차시 데이터
+  let lectureList = [
+    {
+      title: "프로그램과 프로그래밍 언어, 출력과 순차구조",
+      progress: 100,
+      contents: [
+        {
+        type: "video",
+        title: "01-수업목표",
+        time: "9분",
+      },
       {
-      type: "video",
-      title: "01-수업목표",
-      time: "9분",
-    },
-    {
-      type: "pdf",
-      title: "02-프로그램과 프로그래밍 언어",
-    },
-    {
-      type: "pdf",
-      title: "03-출력",
-    },
-    {
-      type: "text",
-      title: "실습1-5라는 숫자를 출력해 봅시다",
-    }
-    ],
-  },
-  {
-    title: "변수와 자료",
-    progress: 100,
-    contents: [
+        type: "pdf",
+        title: "02-프로그램과 프로그래밍 언어",
+      },
       {
-      type: "video",
-      title: "01-수업목표",
-      time: "9분",
-    },
-    {
-      type: "pdf",
-      title: "02-프로그램과 프로그래밍 언어",
-    },
-    {
-      type: "pdf",
-      title: "03-출력",
-    },
-    {
-      type: "text",
-      title: "실습1-5라는 숫자를 출력해 봅시다",
-    }
-    ]
-  },
-  {
-    title: "입력과 자료형 변환",
-    progress: 100,
-    contents: [
+        type: "pdf",
+        title: "03-출력",
+      },
       {
-      type: "video",
-      title: "01-수업목표",
-      time: "9분",
+        type: "text",
+        title: "실습1-5라는 숫자를 출력해 봅시다",
+      }
+      ],
     },
     {
-      type: "pdf",
-      title: "02-프로그램과 프로그래밍 언어",
+      title: "변수와 자료",
+      progress: 100,
+      contents: [
+        {
+        type: "video",
+        title: "01-수업목표",
+        time: "9분",
+      },
+      {
+        type: "pdf",
+        title: "02-프로그램과 프로그래밍 언어",
+      },
+      {
+        type: "pdf",
+        title: "03-출력",
+      },
+      {
+        type: "text",
+        title: "실습1-5라는 숫자를 출력해 봅시다",
+      }
+      ]
     },
     {
-      type: "pdf",
-      title: "03-출력",
+      title: "입력과 자료형 변환",
+      progress: 100,
+      contents: [
+        {
+        type: "video",
+        title: "01-수업목표",
+        time: "9분",
+      },
+      {
+        type: "pdf",
+        title: "02-프로그램과 프로그래밍 언어",
+      },
+      {
+        type: "pdf",
+        title: "03-출력",
+      },
+      {
+        type: "text",
+        title: "실습1-5라는 숫자를 출력해 봅시다",
+      }
+      ]
     },
-    {
-      type: "text",
-      title: "실습1-5라는 숫자를 출력해 봅시다",
-    }
-    ]
-  },
-
-
-
-];
+  ];
   
 
   /**

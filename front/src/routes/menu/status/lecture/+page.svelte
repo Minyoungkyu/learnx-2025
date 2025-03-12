@@ -66,10 +66,14 @@
               type: 'line',
               borderColor: 'rgb(168, 85, 247)',
               backgroundColor: 'rgb(168, 85, 247)',
-              borderWidth: 2,
+              borderWidth: 3,
               fill: false,
               tension: 0.4,
-              order: 1
+              order: 1,
+              pointRadius: 4,
+              pointBackgroundColor: 'white',
+              pointBorderColor: 'rgb(168, 85, 247)',
+              pointBorderWidth: 2,
             }
           ]
         },
@@ -115,10 +119,14 @@
               type: 'line',
               borderColor: 'rgb(168, 85, 247)',
               backgroundColor: 'rgb(168, 85, 247)',
-              borderWidth: 2,
+              borderWidth: 3,
               fill: false,
               tension: 0.4,
-              order: 1
+              order: 1,
+              pointRadius: 4,
+              pointBackgroundColor: 'white',
+              pointBorderColor: 'rgb(168, 85, 247)',
+              pointBorderWidth: 2,
             }
           ]
         },

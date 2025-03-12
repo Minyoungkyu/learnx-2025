@@ -2,6 +2,9 @@
   import { page } from '$app/stores';
   import { goto } from '$app/navigation';
 
+  // 메뉴 확인
+  $: menu = $page.url.pathname.includes('/menu/status') ? 'status' : 'report';
+
   // 현재 활성화된 탭 확인
   $: activeTab = $page.url.pathname.includes('member') ? 'member' : 'lecture';
 
@@ -91,7 +94,7 @@
 
   // 탭 변경 함수
   function changeTab(tab: string) {
-    goto(`/menu/status/${tab}`);
+    goto(`/menu/${menu}/${tab}`);
   }
 
   // 선택된 콘텐츠 관리

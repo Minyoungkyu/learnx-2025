@@ -408,7 +408,7 @@
                   {#if i === 0}
                     <i class="fas fa-puzzle-piece text-blue-500"></i>
                   {:else if i === 1}
-                    <i class="fas fa-sitemap text-purple-500"></i>
+                    <i class="fas fa-project-diagram text-purple-500"></i>
                   {:else if i === 2}
                     <i class="fas fa-lightbulb text-yellow-500"></i>
                   {:else if i === 3}

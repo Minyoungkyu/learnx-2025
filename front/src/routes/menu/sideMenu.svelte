@@ -5,7 +5,7 @@
     const menuItems = [
         { icon: 'fa-home', text: '메인', path: '/menu/main' },
         { icon: 'fa-book', text: '차시 목록', path: '/menu/lecture', active: true },
-        { icon: 'fa-chart-line', text: '학습 현황', path: '/class' },
+        { icon: 'fa-chart-line', text: '학습 현황', path: '/menu/status' },
         { icon: 'fa-robot', text: 'AI퍼스널리포트', path: '/class' },
         { icon: 'fa-map-marked-alt', text: '모험맵', path: '/class' },
         { icon: 'fa-clipboard', text: '게시판', path: '/class' }
@@ -44,7 +44,7 @@
                 <li>
                     <a 
                         href={item.path}
-                        class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-cyan-100 transition-colors duration-150 {$page.url.pathname === item.path ? 'bg-cyan-100' : ''}"
+                        class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-cyan-100 transition-colors duration-150 {$page.url.pathname.startsWith(item.path) ? 'bg-cyan-100' : ''}"
                     >
                         <i class="fas {item.icon} w-5 text-center"></i>
                         <span class="font-medium">{item.text}</span>

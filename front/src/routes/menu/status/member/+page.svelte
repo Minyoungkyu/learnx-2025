@@ -144,6 +144,7 @@
         options: {
           responsive: true,
           maintainAspectRatio: false,
+          // @ts-ignore
           cutout: '80%',
           plugins: {
             legend: {
@@ -211,7 +212,7 @@
     <!-- 라인 차트 -->
     <div class="bg-white rounded-xl p-6 outline outline-2 outline-gray-100">
       <div class="flex justify-between items-center mb-4">
-        <h3 class="font-medium">차시 현황</h3>
+        <h3 class="font-medium">차시 이수 현황</h3>
         <select class="form-select text-sm border-gray-200 rounded-lg">
           <option>실습 점수</option>
         </select>
@@ -225,7 +226,7 @@
     <!-- 원형 차트 -->
     <div class="bg-white rounded-xl p-6 outline outline-2 outline-gray-100">
       <div class="flex justify-between items-center mb-4">
-        <h3 class="font-medium">학습 성취도</h3>
+        <h3 class="font-medium">Circle Chart</h3>
         <button class="text-gray-400">
           <i class="fas fa-ellipsis-h"></i>
         </button>
@@ -239,7 +240,7 @@
             <p class="text-2xl font-bold">{circleChartData.상위}%</p>
           </div>
         </div>
-        <div class="flex flex-col justify-center space-y-4">
+        <div class="space-y-4">
           <div>
             <div class="flex justify-between text-sm mb-1">
               <span>점수</span>
