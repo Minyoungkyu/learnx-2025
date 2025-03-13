@@ -1,6 +1,10 @@
 <script>
   import { goto } from '$app/navigation';
   import rq from '$lib/rq/rq.svelte';
+  import { SvelteFlowProvider } from '@xyflow/svelte';
+
+  import Flow from '../../test3/Flow.svelte';
+  import DnDProvider from '../../test3/DnDProvider2.svelte';
 
   let classTitle = "발 맞춰서 천천히 따라가는 중학생 기초 파이썬";
   let progress = 15;
@@ -251,11 +255,17 @@
     </div>
 
     <!-- 학습요소 마인드맵 -->
-    <div class="mb-6">
+    <div class="mb-6 relative">
       <div class="flex items-center justify-between">
         <h2 class="text-xl font-bold">학습요소 마인드맵</h2>
       </div>
-      <div class="border-b border-gray-300 mt-2"></div>
+      <div class="border-b border-gray-300 mt-2">
+        <!-- <SvelteFlowProvider>
+          <DnDProvider>
+            <Flow />
+          </DnDProvider>
+        </SvelteFlowProvider> -->
+      </div>
     </div>
   </div>
 </div>

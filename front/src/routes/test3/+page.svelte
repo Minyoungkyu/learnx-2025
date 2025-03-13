@@ -5,8 +5,10 @@
     import DnDProvider from './DnDProvider2.svelte';
   </script>
    
-  <SvelteFlowProvider>
-    <DnDProvider>
-      <Flow />
-    </DnDProvider>
-  </SvelteFlowProvider>
+  <div class="w-full h-full">
+    <SvelteFlowProvider>
+      <DnDProvider>
+        <Flow />
+      </DnDProvider>
+    </SvelteFlowProvider>
+  </div>

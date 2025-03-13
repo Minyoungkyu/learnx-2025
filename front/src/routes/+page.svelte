@@ -64,9 +64,10 @@
 </script>
 
 <div class="w-full flex flex-col items-center justify-center">
-  <section class="flexbox-col w-full h-[calc(100vh-64px)] bg-[#F7FAF4] px-4 text-center">
-    <h3 class="text-4xl md:text-5xl lg:text-6xl font-bold text-[#00CA5B]">Learn-X</h3>
-    <p class="text-2xl md:text-3xl lg:text-4xl font-bold">AI시대, 배움을 새롭게 디자인하다!</p>
+  <section class="flexbox-col w-full h-[calc(100vh-64px)] bg-[url('/images/index_main.jpg')] bg-cover bg-center px-4 text-center relative">
+    <div class="absolute inset-0 bg-white opacity-50"></div>
+    <h3 class="relative z-10 text-4xl md:text-5xl lg:text-6xl font-bold text-[#00CA5B]">Learn-X</h3>
+    <p class="relative z-10 text-2xl md:text-3xl lg:text-4xl font-bold">AI시대, 배움을 새롭게 디자인하다!</p>
   </section>
 
   <section class="flexbox-col gap-6 py-20 w-full bg-gradient-to-b from-white to-[#F0F6FF] text-lg font-bold px-4 text-center">
@@ -78,38 +79,41 @@
     <div class="flex flex-col md:flex-row gap-6 mt-8 items-center justify-center">
 
       <div class="card bg-base-100 w-80 shadow-sm" data-aos="fade-up">
-        <figure class="w-full h-80">
+        <figure class="w-full h-80 overflow-hidden cursor-pointer">
           <img
-            src="https://img.daisyui.com/images/stock/photo-1494232410401-ad00d5433cfa.webp"
-            alt="" />
+            src="/images/main_1.jpg"
+            alt=""
+            class="w-full h-full object-cover transition-transform duration-300 hover:scale-110" />
         </figure>
         <div class="card-body">
           <h2 class="card-title">희망이 되는 교육</h2>
-          <p class="text-sm">개인과 가정, 나아가 우리 사회에 희망이 되는 교육을 실천합니다. 모든 학생의 잠재력을 믿고 발전시키는 교육을 지향합니다.</p>
+          <p class="text-sm text-start">개인과 가정, 나아가 우리 사회에 희망이 되는 교육을 실천합니다. 모든 학생의 잠재력을 믿고 발전시키는 교육을 지향합니다.</p>
         </div>
       </div>
 
       <div class="card bg-base-100 w-80 shadow-sm" data-aos="fade-up" data-aos-delay="400">
-        <figure class="w-full h-80">
+        <figure class="w-full h-80 overflow-hidden cursor-pointer">
           <img
-            src="https://img.daisyui.com/images/stock/photo-1494232410401-ad00d5433cfa.webp"
-            alt="" />
+            src="/images/main_2.jpg"
+            alt=""
+            class="w-full h-full object-cover transition-transform duration-300 hover:scale-110" />
         </figure>
         <div class="card-body">
           <h2 class="card-title">미래를 밝히는 교육</h2>
-          <p class="text-sm">혁신적인 교육 방법으로 미래를 이끌어갈 인재를 양성합니다. AI 시대에 걸맞은 창의적이고 실용적인 교육을 제공합니다.</p>
+          <p class="text-sm text-start">혁신적인 교육 방법으로 미래를 이끌어갈 인재를 양성합니다. AI 시대에 걸맞은 창의적이고 실용적인 교육을 제공합니다.</p>
         </div>
       </div>
 
       <div class="card bg-base-100 w-80 shadow-sm" data-aos="fade-up" data-aos-delay="600">
-        <figure class="w-full h-80">
+        <figure class="w-full h-80 overflow-hidden cursor-pointer">
           <img
-            src="https://img.daisyui.com/images/stock/photo-1494232410401-ad00d5433cfa.webp"
-            alt="" />
+            src="/images/main_3.jpg"
+            alt=""
+            class="w-full h-full object-cover transition-transform duration-300 hover:scale-110" />
         </figure>
         <div class="card-body">
           <h2 class="card-title">리더십과 섬김의 인재</h2>
-          <p class="text-sm">탁월한 실력과 함께 겸손한 섬김의 자세를 갖춘 진정한 리더를 키웁니다. 세상에 긍정적인 영향을 미치는 인재로 성장합니다.</p>
+          <p class="text-sm text-start">탁월한 실력과 함께 겸손한 섬김의 자세를 갖춘 진정한 리더를 키웁니다. 세상에 긍정적인 영향을 미치는 인재로 성장합니다.</p>
         </div>
       </div>
 
@@ -165,7 +169,7 @@
             <p class="text-base md:text-lg leading-relaxed">학습을 진행하여 레벨을 올리고 포인트를 획득해보세요!</p>
           </div>
           <div class="w-full md:w-1/2 md:pl-12">
-            <div class="bg-gray-200 h-72 rounded-2xl">
+            <div class="bg-gray-200 h-72 rounded-2xl transition-transform duration-300 hover:scale-105 cursor-pointer">
               <img src="/images/leveling_index.PNG" class="w-full h-full object-contain rounded-2xl" alt="">
             </div>
           </div>
@@ -173,8 +177,8 @@
 
         <div class="flex flex-col-reverse md:flex-row items-center gap-8" data-aos="fade-left">
           <div class="w-full md:w-1/2">
-            <div class="bg-white h-72 rounded-2xl">
-              <img src="/images/achievement_index.PNG" class="w-full h-full object-contain rounded-2xl" alt="">
+            <div class="bg-white h-72 rounded-2xl transition-transform duration-300 hover:scale-105 cursor-pointer">
+              <img src="/images/achieve_index.jpg" class="w-full h-full object-contain rounded-2xl" alt="">
             </div>
           </div>
           <div class="w-full md:w-1/2 md:pl-12">
@@ -185,12 +189,12 @@
 
         <div class="flex flex-col md:flex-row items-center gap-8" data-aos="fade-right">
           <div class="w-full md:w-1/2">
-            <h4 class="text-2xl md:text-3xl font-bold mb-4">실습 게임</h4>
-            <p class="text-base md:text-lg leading-relaxed">실습 게임을 통해 더욱 재미있게 학습해보세요!</p>
+            <h4 class="text-2xl md:text-3xl font-bold mb-4">재미와 학습</h4>
+            <p class="text-base md:text-lg leading-relaxed">게임처럼 학습하는 코딩 교육 시스템</p>
           </div>
           <div class="w-full md:w-1/2 md:pl-12">
-            <div class="bg-white h-72 rounded-2xl">
-              <img src="/images/missioncy_index.PNG" class="w-full h-full object-contain rounded-2xl" alt="">
+            <div class="bg-[#E6D0B3] h-72 rounded-2xl transition-transform duration-300 hover:scale-105 cursor-pointer">
+              <img src="/images/map.PNG" class="w-full h-full object-contain rounded-2xl" alt="">
             </div>
           </div>
         </div>
@@ -205,7 +209,9 @@
         
         <div class="bg-white p-6 rounded-lg shadow" data-aos="fade-up" data-aos-delay="100">
           <div class="flex items-center mb-4">
-            <div class="w-12 h-12 bg-gray-200 rounded-full mr-4"></div>
+            <div class="w-12 h-12 bg-gray-200 rounded-full mr-4 flexbox-col">
+              <i class="fa-regular fa-user text-2xl"></i>
+            </div>
             <div>
               <h4 class="font-bold">김민수 선생님</h4>
             </div>
@@ -215,7 +221,9 @@
 
         <div class="bg-white p-6 rounded-lg shadow" data-aos="fade-up" data-aos-delay="300">
           <div class="flex items-center mb-4">
-            <div class="w-12 h-12 bg-gray-200 rounded-full mr-4"></div>
+            <div class="w-12 h-12 bg-gray-200 rounded-full mr-4 flexbox-col">
+              <i class="fa-regular fa-user text-2xl"></i>
+            </div>
             <div>
               <h4 class="font-bold">이지현 학부모</h4>
             </div>
@@ -225,7 +233,9 @@
 
         <div class="bg-white p-6 rounded-lg shadow" data-aos="fade-up" data-aos-delay="500">
           <div class="flex items-center mb-4">
-            <div class="w-12 h-12 bg-gray-200 rounded-full mr-4"></div>
+            <div class="w-12 h-12 bg-gray-200 rounded-full mr-4 flexbox-col">
+              <i class="fa-regular fa-user text-2xl"></i>
+            </div>
             <div>
               <h4 class="font-bold">박준호 학생</h4>
             </div>

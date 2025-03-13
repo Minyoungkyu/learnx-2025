@@ -24,26 +24,12 @@
       >
         Input Node
       </div>
-      <div
-        class="default-node node"
-        ondragstart={(event) => onDragStart(event, 'default')}
-        draggable={true}
-      >
-        Default Node
-      </div>
-      <div
-        class="output-node node"
-        ondragstart={(event) => onDragStart(event, 'output')}
-        draggable={true}
-      >
-        Output Node
-      </div>
     </div>
   </aside>
    
   <style>
     aside {
-      width: 100%;
+      width: 10%;
       background: #f4f4f4;
       font-size: 12px;
       display: flex;

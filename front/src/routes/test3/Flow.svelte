@@ -1,6 +1,6 @@
 <script lang="ts">
     import { writable } from 'svelte/store';
-    import { SvelteFlow, MarkerType, Background, type Edge, type Node, ConnectionMode, useSvelteFlow } from '@xyflow/svelte';
+    import { SvelteFlow, MarkerType, Background, Controls, MiniMap, type Edge, type Node, ConnectionMode, useSvelteFlow } from '@xyflow/svelte';
    
     import '@xyflow/svelte/dist/style.css';
 
@@ -15,7 +15,7 @@
 
     const onDragOver = (event: DragEvent) => {
     event.preventDefault();
- 
+
     if (event.dataTransfer) {
         event.dataTransfer.dropEffect = 'move';
         }
@@ -81,8 +81,150 @@
     }
 
     const initialNodes: Node[] = [
-      { id: '1', type: 'ResizeAbleNode', width: 100, height: 50, data: {label: '노드 1', styleData: baseData}, position: { x: 100, y: 100 }, style: nodeStyle },
-      { id: '2', type: 'ResizeAbleNode', width: 100, height: 50, data: {label: '노드 2', styleData: baseData}, position: { x: 100, y: 200 }, style: nodeStyle }
+        {
+            id: '1',
+            type: 'ResizeAbleNode',
+            width: 120,
+            height: 50,
+            data: {
+                label: 'TMD_파이썬_리스트',
+                styleData: baseData
+            },
+            position: {
+                x: 150,
+                y: 100
+            },
+            style: 'background: #fff; border: 1px solid black; border-radius: 15px; font-size: 12px; display: flex; align-items: center; justify-content: center;',
+            draggable: false,
+            selectable: false,
+            deletable: false
+        },
+        {
+            id: '2', 
+            type: 'ResizeAbleNode',
+            width: 100,
+            height: 50,
+            data: {
+                label: '1.개념',
+                styleData: baseData
+            },
+            position: {
+                x: 0,
+                y: 200
+            },
+            style: nodeStyle,
+            draggable: false,
+            selectable: false,
+            deletable: false
+        },
+        {
+            id: '3',
+            type: 'ResizeAbleNode', 
+            width: 100,
+            height: 50,
+            data: {
+                label: '2.생성',
+                styleData: baseData
+            },
+            position: {
+                x: 150,
+                y: 200
+            },
+            style: nodeStyle,
+            draggable: false,
+            selectable: false,
+            deletable: false
+        },
+        {
+            id: '4',
+            type: 'ResizeAbleNode',
+            width: 100,
+            height: 50,
+            data: {
+                label: '3.인덱스',
+                styleData: baseData
+            },
+            position: {
+                x: 300,
+                y: 200
+            },
+            style: nodeStyle,
+            draggable: false,
+            selectable: false,
+            deletable: false
+        },
+        {
+            id: '5',
+            type: 'ResizeAbleNode',
+            width: 100,
+            height: 50,
+            data: {
+                label: '데이터구조',
+                styleData: baseData
+            },
+            position: {
+                x: 0,
+                y: 300
+            },
+            style: nodeStyle,
+            draggable: false,
+            selectable: false,
+            deletable: false
+        },
+        {
+            id: '6',
+            type: 'ResizeAbleNode',
+            width: 100,
+            height: 50,
+            data: {
+                label: 'List() 함수',
+                styleData: baseData
+            },
+            position: {
+                x: 150,
+                y: 300
+            },
+            style: nodeStyle,
+            draggable: false,
+            selectable: false,
+            deletable: false
+        },
+        {
+            id: '7',
+            type: 'ResizeAbleNode',
+            width: 100,
+            height: 50,
+            data: {
+                label: '메타데이터',
+                styleData: baseData
+            },
+            position: {
+                x: 0,
+                y: 400
+            },
+            style: nodeStyle,
+            draggable: false,
+            selectable: false,
+            deletable: false
+        },
+        {
+            id: '8',
+            type: 'ResizeAbleNode',
+            width: 100,
+            height: 50,
+            data: {
+                label: 'String split 함수',
+                styleData: baseData
+            },
+            position: {
+                x: 150,
+                y: 400
+            },
+            style: nodeStyle,
+            draggable: false,
+            selectable: false,
+            deletable: false
+        }
     ];
    
     const initialEdges: Edge[] = [
@@ -95,7 +237,87 @@
             data: {
                 styleData: edgeStyleData
             },
-            style: edgeStyle
+            style: edgeStyle,
+            label: "1차시",
+            type: "bezier"
+        },
+        {
+            id: 'edge-2',
+            source: '2',
+            sourceHandle: 'c',
+            target: '5',
+            targetHandle: 'a',
+            data: {
+                styleData: edgeStyleData
+            },
+            style: edgeStyle,
+            label: '개념 심화',
+            type: "bezier"
+        },
+        {
+            id: 'edge-3',
+            source: '5',
+            sourceHandle: 'c',
+            target: '7',
+            targetHandle: 'a',
+            data: {
+                styleData: edgeStyleData
+            },
+            style: edgeStyle,
+            label: '개념 복습',
+            type: "bezier"
+        },
+        {
+            id: 'edge-4',
+            source: '1',
+            sourceHandle: 'c',
+            target: '3',
+            targetHandle: 'a',
+            data: {
+                styleData: edgeStyleData
+            },
+            style: edgeStyle,
+            label: '2차시',
+            type: "bezier"
+        },
+        {
+            id: 'edge-5',
+            source: '3',
+            sourceHandle: 'c',
+            target: '6',
+            targetHandle: 'a',
+            data: {
+                styleData: edgeStyleData
+            },
+            style: edgeStyle,
+            label: '생성 기본',
+            type: "bezier"
+        },
+        {
+            id: 'edge-6',
+            source: '6',
+            sourceHandle: 'c',
+            target: '8',
+            targetHandle: 'a',
+            data: {
+                styleData: edgeStyleData
+            },
+            style: edgeStyle,
+            label: '생성 심화',
+            type: "bezier"
+        },
+        {
+            id: 'edge-7',
+            source: '1',
+            sourceHandle: 'c',
+            target: '4',
+            targetHandle: 'a',
+            data: {
+                styleData: edgeStyleData
+            },
+            style: edgeStyle,
+            label: '3차시',
+            type: "bezier"
         }
 
     ];
@@ -249,16 +471,47 @@
 
         selectAny();
     }
+
+    // let isEditMode = writable(false);
+
+    let isEditMode = $state(false);
+
+    // function toggleEditMode() {
+    //     isEditMode.update(mode => !mode);
+
+    //     nodes.update(ns => ns.map(node => ({ ...node, draggable: $isEditMode, selectable: $isEditMode, deletable: $isEditMode })));
+    // }
+
+    function toggleEditMode() {
+        isEditMode = !isEditMode;
+
+        nodes.update(ns => ns.map(node => ({ ...node, draggable: isEditMode, selectable: isEditMode, deletable: isEditMode })));
+
+        let nodesJson = JSON.stringify($nodes, null, 2);
+        let edgesJson = JSON.stringify($edges, null, 2);
+
+        console.log(nodesJson);
+        console.log(edgesJson);
+    }
   </script>
    
-  <div style="height:88vh;">
-    <Sidebar />
+  <div class="h-[80vh]">
+    <Sidebar /> 
+    <button class="btn btn-primary mt-10" onclick={toggleEditMode}>
+        {#if isEditMode}
+          뷰 모드로 전환
+        {/if}
+        {#if !isEditMode}
+          편집 모드로 전환
+        {/if}
+    </button>
+    
     <SvelteFlow 
         {nodes} 
         {edges} 
         fitView 
-        nodeTypes={nodeTypes} 
-        edgeTypes={edgeTypes}
+        {nodeTypes} 
+        {edgeTypes}
         connectionMode={ConnectionMode.Loose}
         on:nodeclick={(event)=> {selectNode(event.detail.node)}}
         on:edgeclick={(event)=> {selectEdge(event.detail.edge)}}
@@ -266,8 +519,9 @@
         on:dragover={onDragOver}
         on:drop={onDrop}
     >
+
         {#if selectedNode}
-        <div class="fixed right-0 top-0 w-80 h-full z-[4] bg-base-200 shadow-lg p-6 overflow-y-auto">
+        <div class="absolute right-0 top-0 w-80 h-full z-[4] bg-base-200 shadow-lg p-6 overflow-y-auto">
             <h2 class="text-xl font-bold mb-6">노드 설정</h2>
 
             <div class="form-control mb-4">
@@ -464,5 +718,8 @@
         </div>
         {/if}
         <Background />
+        <!-- <Background patternColor="#aaa" gap={16} /> -->
+        <!-- <Controls />
+        <MiniMap zoomable pannable height={120} /> -->
     </SvelteFlow>
   </div>
