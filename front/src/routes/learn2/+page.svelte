@@ -4,6 +4,7 @@
     import { onMount } from "svelte";
     import * as pdfjsLib from 'pdfjs-dist';
     import 'pdfjs-dist/build/pdf.worker.entry';
+    import ExcalidrawComponent from '$lib/components/ExcalidrawComponent.svelte';
 
     let pdfDoc: any = null;
     let pageNum = 1;
@@ -134,6 +135,8 @@
 </script>
 
 <div class="w-full h-screen flex flex-row overflow-hidden">
+    <ExcalidrawComponent/>
+
     <div class="w-[250px] min-w-[200px] sideMenuContainer bg-[#1E273B]">
         <SideMenu />
     </div>

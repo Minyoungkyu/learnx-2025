@@ -4,7 +4,7 @@
     import { onMount } from "svelte";
     import Resizer from "$lib/components/Resizer.svelte";
     import rq from '$lib/rq/rq.svelte';
-
+    import ExcalidrawComponent from '$lib/components/ExcalidrawComponent.svelte';
     let editor: any;
 
     onMount(() => {
@@ -13,6 +13,7 @@
 </script>
 
 <div class="w-full h-screen flex flex-row overflow-hidden">
+    <ExcalidrawComponent/>
     <div class="w-[250px] min-w-[200px] sideMenuContainer bg-[#1E273B]">
         <SideMenu />
     </div>
