@@ -294,7 +294,7 @@
                 <button class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg" on:click={() => goto('/menu/lecture')}>입장하기</button>
               </div>
               <div class="bg-gray-200 rounded-full h-2">
-                <div class="bg-cyan-600 h-2 rounded-full" style="width: {class_item.progress}%"></div>
+                <div class="bg-cyan-400 h-2 rounded-full" style="width: {class_item.progress}%"></div>
               </div>
             </div>
           {/each}

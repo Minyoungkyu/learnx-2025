@@ -237,11 +237,11 @@
         <!-- 대단원 제목과 진행률 -->
         <!-- svelte-ignore a11y_click_events_have_key_events -->
         <!-- svelte-ignore a11y_no_static_element_interactions -->
-        <div class="rounded-xl outline outline-2 outline-gray-200 shadow-md p-6 mb-4 cursor-pointer bg-white"
+        <div class="rounded-xl outline outline-2 outline-gray-100 shadow-md p-6 mb-4 cursor-pointer bg-white"
              onclick={() => handleLectureSelect(index)}>
           <div class="flex items-center justify-between">
             <div class="flex items-center gap-3">
-              <span class="bg-cyan-500 text-white px-3 py-1 rounded-md text-sm font-bold">
+              <span class="bg-cyan-400 text-white px-3 py-1 rounded-md text-sm font-bold">
                 {index + 1}차시
               </span>
               <h2 class="text-lg font-bold">{lecture.title}</h2>
@@ -249,7 +249,7 @@
             <div class="flex items-center gap-4">
               <div class="flex items-center gap-2">
                 <div class="bg-gray-200 rounded-full h-2 w-32">
-                  <div class="bg-cyan-600 h-2 rounded-full" style="width: {lecture.progress}%"></div>
+                  <div class="bg-cyan-400 h-2 rounded-full" style="width: {lecture.progress}%"></div>
                 </div>
                 <span class="text-sm font-bold text-gray-500">{lecture.progress}%</span>
               </div>

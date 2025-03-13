@@ -8,7 +8,7 @@
         { icon: 'fa-chart-line', text: '학습 현황', path: '/menu/status' },
         { icon: 'fa-robot', text: 'AI퍼스널리포트', path: '/menu/report' },
         { icon: 'fa-map-marked-alt', text: '모험맵', path: '/menu/map' },
-        { icon: 'fa-clipboard', text: '게시판', path: '/class' }
+        { icon: 'fa-clipboard', text: '게시판', path: '/menu/board' }
     ];
 </script>
 

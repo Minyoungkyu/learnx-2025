@@ -164,7 +164,7 @@
     </div>
 
     <!-- 클래스 정보 -->
-    <div class="bg-white rounded-xl shadow-md p-6 mb-8">
+    <div class="bg-white rounded-xl shadow-md p-6 mb-8 outline outline-2 outline-gray-100">
       <div class="flex items-center justify-between mb-4">
         <h1 class="text-2xl font-bold text-cyan-500">{classTitle}</h1>
         <span class="bg-cyan-100 text-cyan-800 px-3 py-1 rounded-full text-sm font-bold">
@@ -172,7 +172,7 @@
         </span>
       </div>
       <div class="bg-gray-200 rounded-full h-2 mb-4">
-        <div class="bg-cyan-600 h-2 rounded-full" style="width: {progress}%"></div>
+        <div class="bg-cyan-400 h-2 rounded-full" style="width: {progress}%"></div>
       </div>
       <div class="flex items-center gap-2 mb-4">
         <i class="fas fa-user-graduate text-gray-600"></i>
@@ -208,12 +208,12 @@
       {#each curriculumList as curriculum, index}
         <!-- svelte-ignore a11y_click_events_have_key_events -->
         <!-- svelte-ignore a11y_no_static_element_interactions -->
-        <div class="bg-white rounded-xl shadow-md cursor-pointer"
+        <div class="bg-white rounded-xl shadow-md cursor-pointer outline outline-2 outline-gray-100"
              on:click={() => handleCurriculumSelect(index)}>
           <!-- 차시 헤더 -->
           <div class="p-5 flex items-center justify-between">
             <div class="flex items-center gap-3">
-              <span class="bg-cyan-500 text-white px-3 py-1 rounded-md text-sm font-bold">
+              <span class="bg-cyan-400 text-white px-3 py-1 rounded-md text-sm font-bold">
                 {index + 1}차시
               </span>
               <h3 class="font-bold">{curriculum.title}</h3>
@@ -221,7 +221,7 @@
             <div class="flex items-center gap-4">
               <div class="flex items-center gap-2">
                 <div class="bg-gray-200 rounded-full h-2 w-24">
-                  <div class="bg-cyan-600 h-2 rounded-full" style="width: {curriculum.progress}%"></div>
+                  <div class="bg-cyan-400 h-2 rounded-full" style="width: {curriculum.progress}%"></div>
                 </div>
                 <span class="text-sm font-bold text-gray-500">{curriculum.progress}%</span>
               </div>
@@ -231,15 +231,18 @@
 
           <!-- 차시 내용 (선택된 경우에만 표시) -->
           {#if selectedCurriculumIndex === index}
-            <div class="border-t border-gray-200 p-4">
-              <p class="text-gray-600 mb-4">{curriculum.description}</p>
-              <div class="flex justify-end">
-                <button 
-                  class="bg-indigo-600 text-white px-6 py-2 rounded-lg hover:bg-indigo-700 transition-colors duration-150"
-                  on:click={handleStudyClick}
-                >
-                  학습하기
-                </button>
+            <div>
+              <div class="border-b border-gray-200 mx-4"></div>
+              <div class="p-4">
+                <p class="text-gray-600 mb-4">{curriculum.description}</p>
+                <div class="flex justify-end">
+                  <button 
+                    class="bg-indigo-600 text-white px-6 py-2 rounded-lg hover:bg-indigo-700 transition-colors duration-150"
+                    on:click={handleStudyClick}
+                  >
+                    학습하기
+                  </button>
+                </div>
               </div>
             </div>
           {/if}
