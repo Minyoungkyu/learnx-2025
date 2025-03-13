@@ -1,10 +1,36 @@
-<script>
+<script lang="ts">
   import { goto } from '$app/navigation';
   import rq from '$lib/rq/rq.svelte';
   import { SvelteFlowProvider } from '@xyflow/svelte';
+  import { writable } from 'svelte/store';
 
   import Flow from '../../test3/Flow.svelte';
   import DnDProvider from '../../test3/DnDProvider2.svelte';
+
+  let flow: any;
+  let isEditMode = writable(false);
+  let isFullscreen = $state(false);
+  let flowContainer: HTMLElement;
+  let flowContainerBackground: HTMLElement;
+
+  function toggleEditMode() {
+    isEditMode.update(mode => !mode);
+    if(flow) {
+      flow.toggleEditMode();
+    }
+  }
+
+  function toggleFullscreen() {
+    isFullscreen = !isFullscreen;
+    
+    // 전체화면 모드로 전환 시 body 스크롤을 가장 아래로 이동
+    setTimeout(() => {
+      window.scrollTo({
+        top: document.body.scrollHeight,
+        behavior: 'smooth'
+      });
+    }, 100);
+  }
 
   let classTitle = "발 맞춰서 천천히 따라가는 중학생 기초 파이썬";
   let progress = 15;
@@ -113,13 +139,13 @@
   ];
 
   // 선택된 차시 인덱스 (기본값: -1, 모두 닫힌 상태)
-  let selectedCurriculumIndex = -1;
+  let selectedCurriculumIndex = $state(-1);
 
   // 차시 선택 핸들러
   /**
    * @param {number} index
    */
-  function handleCurriculumSelect(index) {
+  function handleCurriculumSelect(index: number) {
     // 이미 선택된 차시를 다시 클릭하면 닫기
     selectedCurriculumIndex = selectedCurriculumIndex === index ? -1 : index;
   }
@@ -127,7 +153,7 @@
   /**
    * @param {string} title
    */
-  function truncateTitle(title, maxLength = 25) {
+  function truncateTitle(title:string, maxLength = 25) {
     return title.length > maxLength 
       ? title.slice(0, maxLength) + '...'
       : title;
@@ -137,7 +163,7 @@
    * 학습하기 버튼 클릭 핸들러
    * @param {Event} event
    */
-  function handleStudyClick(event) {
+  function handleStudyClick(event: Event) {
     event.stopPropagation(); // 상위 요소 클릭 이벤트 전파 방지
     rq.goTo('/learn'); // 학습 페이지로 이동
   }
@@ -151,7 +177,7 @@
   }
 </script>
 
-<div class="w-full">
+<div class="w-full relative">
   <div class="max-w-4xl mx-auto px-4 py-8">
     <!-- 상단 클래스 정보 타이틀 -->
     <div class="mb-6">
@@ -159,7 +185,7 @@
         <h1 class="text-xl font-bold">클래스 정보</h1>
         <button 
           class="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition-colors duration-150"
-          on:click={handleEditClick}
+          onclick={handleEditClick}
         >
           수정하기
         </button>
@@ -213,7 +239,7 @@
         <!-- svelte-ignore a11y_click_events_have_key_events -->
         <!-- svelte-ignore a11y_no_static_element_interactions -->
         <div class="bg-white rounded-xl shadow-md cursor-pointer outline outline-2 outline-gray-100"
-             on:click={() => handleCurriculumSelect(index)}>
+             onclick={() => handleCurriculumSelect(index)}>
           <!-- 차시 헤더 -->
           <div class="p-5 flex items-center justify-between">
             <div class="flex items-center gap-3">
@@ -242,7 +268,7 @@
                 <div class="flex justify-end">
                   <button 
                     class="bg-indigo-600 text-white px-6 py-2 rounded-lg hover:bg-indigo-700 transition-colors duration-150"
-                    on:click={handleStudyClick}
+                    onclick={handleStudyClick}
                   >
                     학습하기
                   </button>
@@ -255,16 +281,42 @@
     </div>
 
     <!-- 학습요소 마인드맵 -->
-    <div class="mb-6 relative">
+    <div class="{isFullscreen ? 'absolute top-0 left-0 w-full h-[90%] z-[999999] bg-white' : ''} w-full" bind:this={flowContainer}>
       <div class="flex items-center justify-between">
         <h2 class="text-xl font-bold">학습요소 마인드맵</h2>
       </div>
-      <div class="border-b border-gray-300 mt-2">
-        <!-- <SvelteFlowProvider>
+      <div class="mt-2 h-full shadow-md {isFullscreen ? 'bg-white' : ''} " bind:this={flowContainerBackground}>
+        <SvelteFlowProvider>
           <DnDProvider>
-            <Flow />
+            <Flow bind:this={flow} {isEditMode}/>
           </DnDProvider>
-        </SvelteFlowProvider> -->
+        </SvelteFlowProvider>
+      </div>
+      <div class="bg-white h-12 rounded-b-xl shadow-md flex flex-row justify-between items-center">
+        <div class="w-full pl-10 flex items-center font-bold text-sm">
+          <div>발 맞추어 천천히 따라가는 중학생 기초 파이썬</div>
+        </div>
+        <div class="w-full h-full flex flex-row justify-end items-center pr-8 gap-4">
+          <button class="btn btn-outline btn-sm bottom-0 right-0" onclick={toggleEditMode}>
+            {#if $isEditMode}
+              <i class="fa-regular fa-floppy-disk"></i>
+            {/if}
+            {#if !$isEditMode}
+              <i class="fa-solid fa-pen-to-square"></i>
+            {/if}
+          </button>
+          <button 
+            class="btn btn-outline btn-sm" 
+            onclick={(toggleFullscreen)}
+            title="전체화면"
+          >
+            {#if isFullscreen}
+              <i class="fa-solid fa-down-left-and-up-right-to-center"></i>
+            {:else}
+              <i class="fa-solid fa-up-right-and-down-left-from-center"></i>
+            {/if}
+          </button>
+        </div>
       </div>
     </div>
   </div>

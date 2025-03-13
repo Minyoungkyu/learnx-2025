@@ -1,5 +1,6 @@
 <script lang="ts">
     import { writable } from 'svelte/store';
+    import type { Writable } from 'svelte/store';
     import { SvelteFlow, MarkerType, Background, Controls, MiniMap, type Edge, type Node, ConnectionMode, useSvelteFlow } from '@xyflow/svelte';
    
     import '@xyflow/svelte/dist/style.css';
@@ -20,6 +21,8 @@
         event.dataTransfer.dropEffect = 'move';
         }
     };
+
+    let { isEditMode } = $props<{ isEditMode: Writable<boolean> }>();
     
     const onDrop = (event: DragEvent) => {
         event.preventDefault();
@@ -88,16 +91,25 @@
             height: 50,
             data: {
                 label: 'TMD_파이썬_리스트',
-                styleData: baseData
+                styleData: {
+                    backgroundColor: '#8F82C8',
+                    borderWidth: '1px',
+                    borderStyle: 'solid',
+                    borderColor: '#000',
+                    borderRadius: '15px',
+                    fontSize: '12px',
+                    bold: false
+                }
             },
             position: {
                 x: 150,
                 y: 100
             },
-            style: 'background: #fff; border: 1px solid black; border-radius: 15px; font-size: 12px; display: flex; align-items: center; justify-content: center;',
+            style: 'background: #8F82C8; border: 1px solid black; border-radius: 15px; font-size: 12px; display: flex; align-items: center; justify-content: center;',
             draggable: false,
             selectable: false,
-            deletable: false
+            deletable: false,
+            connectable: false
         },
         {
             id: '2', 
@@ -106,16 +118,25 @@
             height: 50,
             data: {
                 label: '1.개념',
-                styleData: baseData
+                styleData: {
+                    backgroundColor: '#E0E622',
+                    borderWidth: '1px',
+                    borderStyle: 'solid',
+                    borderColor: '#000',
+                    borderRadius: '15px',
+                    fontSize: '12px',
+                    bold: false
+                }
             },
             position: {
                 x: 0,
                 y: 200
             },
-            style: nodeStyle,
+            style: 'background: #E0E622; border: 1px solid black; border-radius: 15px; font-size: 12px; display: flex; align-items: center; justify-content: center;',
             draggable: false,
             selectable: false,
-            deletable: false
+            deletable: false,
+            connectable: false
         },
         {
             id: '3',
@@ -124,16 +145,25 @@
             height: 50,
             data: {
                 label: '2.생성',
-                styleData: baseData
+                styleData: {
+                    backgroundColor: '#F86D38',
+                    borderWidth: '1px',
+                    borderStyle: 'solid',
+                    borderColor: '#000',
+                    borderRadius: '15px',
+                    fontSize: '12px',
+                    bold: false
+                }
             },
             position: {
                 x: 150,
                 y: 200
             },
-            style: nodeStyle,
+            style: 'background: #F86D38; border: 1px solid black; border-radius: 15px; font-size: 12px; display: flex; align-items: center; justify-content: center;',
             draggable: false,
             selectable: false,
-            deletable: false
+            deletable: false,
+            connectable: false
         },
         {
             id: '4',
@@ -142,16 +172,25 @@
             height: 50,
             data: {
                 label: '3.인덱스',
-                styleData: baseData
+                styleData: {
+                    backgroundColor: '#A1C5F9',
+                    borderWidth: '1px',
+                    borderStyle: 'solid',
+                    borderColor: '#000',
+                    borderRadius: '15px',
+                    fontSize: '12px',
+                    bold: false
+                }
             },
             position: {
                 x: 300,
                 y: 200
             },
-            style: nodeStyle,
+            style: 'background: #A1C5F9; border: 1px solid black; border-radius: 15px; font-size: 12px; display: flex; align-items: center; justify-content: center;',
             draggable: false,
             selectable: false,
-            deletable: false
+            deletable: false,
+            connectable: false
         },
         {
             id: '5',
@@ -160,16 +199,25 @@
             height: 50,
             data: {
                 label: '데이터구조',
-                styleData: baseData
+                styleData: {
+                    backgroundColor: '#F6F9A3',
+                    borderWidth: '1px',
+                    borderStyle: 'solid',
+                    borderColor: '#000',
+                    borderRadius: '15px',
+                    fontSize: '12px',
+                    bold: false
+                }
             },
             position: {
                 x: 0,
                 y: 300
             },
-            style: nodeStyle,
+            style: 'background: #F6F9A3; border: 1px solid black; border-radius: 15px; font-size: 12px; display: flex; align-items: center; justify-content: center;',
             draggable: false,
             selectable: false,
-            deletable: false
+            deletable: false,
+            connectable: false
         },
         {
             id: '6',
@@ -178,16 +226,25 @@
             height: 50,
             data: {
                 label: 'List() 함수',
-                styleData: baseData
+                styleData: {
+                    backgroundColor: '#F9B9A1',
+                    borderWidth: '1px',
+                    borderStyle: 'solid',
+                    borderColor: '#000',
+                    borderRadius: '15px',
+                    fontSize: '12px',
+                    bold: false
+                }
             },
             position: {
                 x: 150,
                 y: 300
             },
-            style: nodeStyle,
+            style: 'background: #F9B9A1; border: 1px solid black; border-radius: 15px; font-size: 12px; display: flex; align-items: center; justify-content: center;',
             draggable: false,
             selectable: false,
-            deletable: false
+            deletable: false,
+            connectable: false
         },
         {
             id: '7',
@@ -196,16 +253,25 @@
             height: 50,
             data: {
                 label: '메타데이터',
-                styleData: baseData
+                styleData: {
+                    backgroundColor: '#F6F9A3',
+                    borderWidth: '1px',
+                    borderStyle: 'solid',
+                    borderColor: '#000',
+                    borderRadius: '15px',
+                    fontSize: '12px',
+                    bold: false
+                }
             },
             position: {
                 x: 0,
                 y: 400
             },
-            style: nodeStyle,
+            style: 'background: #F6F9A3; border: 1px solid black; border-radius: 15px; font-size: 12px; display: flex; align-items: center; justify-content: center;',
             draggable: false,
             selectable: false,
-            deletable: false
+            deletable: false,
+            connectable: false
         },
         {
             id: '8',
@@ -214,16 +280,25 @@
             height: 50,
             data: {
                 label: 'String split 함수',
-                styleData: baseData
+                styleData: {
+                    backgroundColor: '#F9B9A1',
+                    borderWidth: '1px',
+                    borderStyle: 'solid',
+                    borderColor: '#000',
+                    borderRadius: '15px',
+                    fontSize: '12px',
+                    bold: false
+                }
             },
             position: {
                 x: 150,
                 y: 400
             },
-            style: nodeStyle,
+            style: 'background: #F9B9A1; border: 1px solid black; border-radius: 15px; font-size: 12px; display: flex; align-items: center; justify-content: center;',
             draggable: false,
             selectable: false,
-            deletable: false
+            deletable: false,
+            connectable: false
         }
     ];
    
@@ -235,11 +310,20 @@
             target: '2',
             targetHandle: 'a',
             data: {
-                styleData: edgeStyleData
+                styleData: {
+                    label: '1차시',
+                    type: 'bezier',
+                    marker: 'none',
+                    color: '#000',
+                    width: 1,
+                    dasharray: '0'
+                }
             },
             style: edgeStyle,
             label: "1차시",
-            type: "bezier"
+            type: "bezier",
+            selectable: false,
+            deletable: false
         },
         {
             id: 'edge-2',
@@ -248,11 +332,20 @@
             target: '5',
             targetHandle: 'a',
             data: {
-                styleData: edgeStyleData
+                styleData: {
+                    label: '개념 심화',
+                    type: 'bezier',
+                    marker: 'none',
+                    color: '#000',
+                    width: 1,
+                    dasharray: '0'
+                }
             },
             style: edgeStyle,
             label: '개념 심화',
-            type: "bezier"
+            type: "bezier",
+            selectable: false,
+            deletable: false
         },
         {
             id: 'edge-3',
@@ -261,11 +354,20 @@
             target: '7',
             targetHandle: 'a',
             data: {
-                styleData: edgeStyleData
+                styleData: {
+                    label: '개념 복습',
+                    type: 'bezier',
+                    marker: 'none',
+                    color: '#000',
+                    width: 1,
+                    dasharray: '0'
+                }
             },
             style: edgeStyle,
             label: '개념 복습',
-            type: "bezier"
+            type: "bezier",
+            selectable: false,
+            deletable: false
         },
         {
             id: 'edge-4',
@@ -274,7 +376,14 @@
             target: '3',
             targetHandle: 'a',
             data: {
-                styleData: edgeStyleData
+                styleData: {
+                    label: '2차시',
+                    type: 'bezier',
+                    marker: 'none',
+                    color: '#000',
+                    width: 1,
+                    dasharray: '0'
+                }
             },
             style: edgeStyle,
             label: '2차시',
@@ -287,11 +396,20 @@
             target: '6',
             targetHandle: 'a',
             data: {
-                styleData: edgeStyleData
+                styleData: {
+                    label: '생성 기본',
+                    type: 'bezier',
+                    marker: 'none',
+                    color: '#000',
+                    width: 1,
+                    dasharray: '0'
+                }
             },
             style: edgeStyle,
             label: '생성 기본',
-            type: "bezier"
+            type: "bezier",
+            selectable: false,
+            deletable: false
         },
         {
             id: 'edge-6',
@@ -300,11 +418,20 @@
             target: '8',
             targetHandle: 'a',
             data: {
-                styleData: edgeStyleData
+                styleData: {
+                    label: '생성 심화',
+                    type: 'bezier',
+                    marker: 'none',
+                    color: '#000',
+                    width: 1,
+                    dasharray: '0'
+                }
             },
             style: edgeStyle,
             label: '생성 심화',
-            type: "bezier"
+            type: "bezier",
+            selectable: false,
+            deletable: false
         },
         {
             id: 'edge-7',
@@ -313,11 +440,20 @@
             target: '4',
             targetHandle: 'a',
             data: {
-                styleData: edgeStyleData
+                styleData: {
+                    label: '3차시',
+                    type: 'bezier',
+                    marker: 'none',
+                    color: '#000',
+                    width: 1,
+                    dasharray: '0'
+                }
             },
             style: edgeStyle,
             label: '3차시',
-            type: "bezier"
+            type: "bezier",
+            selectable: false,
+            deletable: false
         }
 
     ];
@@ -329,13 +465,11 @@
     let selectedEdge: any = $state();
 
     function selectNode(node: Node) {
-        console.log(node);
         selectedNode = node;
         selectedEdge = undefined;
     }
 
     function selectEdge(edge: Edge) {
-        console.log(edge);
         selectedEdge = edge;
         selectedNode = undefined;
     }
@@ -474,44 +608,40 @@
 
     // let isEditMode = writable(false);
 
-    let isEditMode = $state(false);
+    // let isEditMode = $state(false);
 
-    // function toggleEditMode() {
-    //     isEditMode.update(mode => !mode);
+    // // function toggleEditMode() {
+    // //     isEditMode.update(mode => !mode);
 
-    //     nodes.update(ns => ns.map(node => ({ ...node, draggable: $isEditMode, selectable: $isEditMode, deletable: $isEditMode })));
-    // }
+    // //     nodes.update(ns => ns.map(node => ({ ...node, draggable: $isEditMode, selectable: $isEditMode, deletable: $isEditMode })));
+    // // }
 
-    function toggleEditMode() {
-        isEditMode = !isEditMode;
+    export function toggleEditMode() {
 
-        nodes.update(ns => ns.map(node => ({ ...node, draggable: isEditMode, selectable: isEditMode, deletable: isEditMode })));
+        nodes.update(ns => ns.map(node => ({ ...node, draggable: $isEditMode, selectable: $isEditMode, deletable: $isEditMode, connectable: $isEditMode })));
+        edges.update(es => es.map(edge => ({ ...edge, selectable: $isEditMode, deletable: $isEditMode })));
 
-        let nodesJson = JSON.stringify($nodes, null, 2);
-        let edgesJson = JSON.stringify($edges, null, 2);
+        selectedNode = undefined;
+        selectedEdge = undefined;
 
-        console.log(nodesJson);
-        console.log(edgesJson);
+        // let nodesJson = JSON.stringify($nodes, null, 2);
+        // let edgesJson = JSON.stringify($edges, null, 2);
     }
+
+    const initialViewport = {
+        x: 150,   // x축 위치
+        y: 0,   // y축 위치
+        zoom: 1.5 // 줌 레벨
+    };
   </script>
    
   <div class="h-[80vh]">
-    <Sidebar /> 
-    <button class="btn btn-primary mt-10" onclick={toggleEditMode}>
-        {#if isEditMode}
-          뷰 모드로 전환
-        {/if}
-        {#if !isEditMode}
-          편집 모드로 전환
-        {/if}
-    </button>
-    
     <SvelteFlow 
         {nodes} 
         {edges} 
-        fitView 
         {nodeTypes} 
         {edgeTypes}
+        {initialViewport}
         connectionMode={ConnectionMode.Loose}
         on:nodeclick={(event)=> {selectNode(event.detail.node)}}
         on:edgeclick={(event)=> {selectEdge(event.detail.edge)}}
@@ -520,7 +650,9 @@
         on:drop={onDrop}
     >
 
-        {#if selectedNode}
+        <Sidebar {isEditMode} /> 
+
+        {#if selectedNode && $isEditMode}
         <div class="absolute right-0 top-0 w-80 h-full z-[4] bg-base-200 shadow-lg p-6 overflow-y-auto">
             <h2 class="text-xl font-bold mb-6">노드 설정</h2>
 
@@ -628,8 +760,8 @@
         </div>
         {/if}
 
-        {#if selectedEdge}
-        <div class="fixed right-0 top-0 w-80 h-full z-[4] bg-base-200 shadow-lg p-6 overflow-y-auto">
+        {#if selectedEdge && $isEditMode}
+        <div class="absolute right-0 top-0 w-80 h-full z-[4] bg-base-200 shadow-lg p-6 overflow-y-auto">
             <h2 class="text-xl font-bold mb-6">연결선 설정</h2>
 
             <div class="form-control mb-4">
@@ -721,5 +853,12 @@
         <!-- <Background patternColor="#aaa" gap={16} /> -->
         <!-- <Controls />
         <MiniMap zoomable pannable height={120} /> -->
+
+        <style>
+            .svelte-flow__attribution {
+                display: none !important;
+            }
+            </style>
     </SvelteFlow>
+    
   </div>

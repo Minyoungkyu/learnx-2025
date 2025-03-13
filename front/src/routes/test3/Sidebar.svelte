@@ -1,5 +1,8 @@
 <script lang="ts">
     import { useDnD } from './utils';
+    import type { Writable } from 'svelte/store';
+
+    let { isEditMode } = $props<{ isEditMode: Writable<boolean> }>();
    
     const type = useDnD();
    
@@ -14,18 +17,19 @@
     };
   </script>
    
+  {#if $isEditMode}
   <aside>
-    <div class="label">You can drag these nodes to the pane below.</div>
-    <div class="nodes-container">
+    <div class="nodes-container absolute z-[999999] top-0 left-0 btn w-32 h-16 rounded-xl border-black shadow-md">
       <div
         class="input-node node"
         ondragstart={(event) => onDragStart(event, 'custom')}
         draggable={true}
       >
-        Input Node
+        끌어서 노드추가
       </div>
     </div>
   </aside>
+  {/if}
    
   <style>
     aside {
@@ -49,7 +53,7 @@
       justify-content: center;
     }
    
-    .node {
+    /* .node {
       margin: 0.5rem;
       border: 1px solid #111;
       padding: 0.5rem 1rem;
@@ -57,5 +61,5 @@
       border-radius: 3px;
       cursor: grab;
       width: 50px;
-    }
+    } */
   </style>
