@@ -8,7 +8,7 @@
   import DnDProvider from '../../test3/DnDProvider2.svelte';
 
   let flow: any;
-  let isEditMode = writable(true);
+  let isEditMode = writable(false);
   let isFullscreen = $state(false);
   let flowContainer: HTMLElement;
   let flowContainerBackground: HTMLElement;
