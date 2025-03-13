@@ -629,10 +629,11 @@
     }
 
     const initialViewport = {
-        x: 150,   // x축 위치
+        x: 200,   // x축 위치
         y: 0,   // y축 위치
-        zoom: 1.5 // 줌 레벨
+        zoom: 1.2 // 줌 레벨
     };
+
   </script>
    
   <div class="h-[80vh]">
@@ -653,7 +654,7 @@
         <Sidebar {isEditMode} /> 
 
         {#if selectedNode && $isEditMode}
-        <div class="absolute right-0 top-0 w-80 h-full z-[4] bg-base-200 shadow-lg p-6 overflow-y-auto">
+        <div class="absolute right-0 top-0 w-[270px] h-full z-[4] bg-base-200 shadow-lg p-2 overflow-y-auto">
             <h2 class="text-xl font-bold mb-6">노드 설정</h2>
 
             <div class="form-control mb-4">
@@ -674,7 +675,7 @@
                 <input 
                     id="node-font-size"
                     type="text"
-                    class="input input-bordered w-full h-12" 
+                    class="input input-bordered w-full" 
                     bind:value={selectedNode.data.styleData.fontSize}
                 />
             </div>
@@ -691,56 +692,66 @@
                 />
             </div>
 
-            <div class="form-control mb-4">
-                <label class="label" for="node-bg">
-                    <span class="label-text">배경 색상</span>
-                </label>
-                <input 
-                    id="node-bg"
-                    type="color"
-                    class="input input-bordered w-full h-12" 
-                    bind:value={selectedNode.data.styleData.backgroundColor}
-                />
+            <div class="flex flex-row items-center justify-start gap-2">
+                
+                <div class="form-control mb-4 min-w-[173px]">
+                    <label class="label" for="node-border-width">
+                        <span class="label-text">테두리 두께</span>
+                    </label>
+                    <input 
+                        id="node-border-width"
+                        type="text"
+                        class="input input-bordered w-full min-w-[173px]" 
+                        bind:value={selectedNode.data.styleData.borderWidth}
+                    />
+                </div>
+
+                <div class="form-control mb-4 flex flex-col justify-center items-center w-full">
+                    <label class="label" for="node-bg">
+                        <span class="label-text">배경 색상</span>
+                    </label>
+                    <input 
+                        id="node-bg"
+                        type="color"
+                        class="input-bordered w-10 h-10" 
+                        bind:value={selectedNode.data.styleData.backgroundColor}
+                    />
+                </div>
+    
             </div>
 
-            <div class="form-control mb-4">
-                <label class="label" for="node-border-width">
-                    <span class="label-text">테두리 두께</span>
-                </label>
-                <input 
-                    id="node-border-width"
-                    type="text"
-                    class="input input-bordered w-full h-12" 
-                    bind:value={selectedNode.data.styleData.borderWidth}
-                />
+            <div class="flex items-center justify-start gap-2">
+
+                <div class="form-control mb-4">
+                    <label class="label" for="node-border-style">
+                        <span class="label-text">테두리 스타일</span>
+                    </label>
+                    <select 
+                        id="node-border-style"
+                        class="select select-bordered w-full" 
+                        bind:value={selectedNode.data.styleData.borderStyle}
+                    >
+                        <option value="solid">직선</option>
+                        <option value="dotted">점선</option>
+                        <option value="dashed">짧은선</option>
+                    </select>
+                </div>
+    
+                <div class="form-control mb-4 flex flex-col justify-center items-center">
+                    <label class="label" for="node-border-color">
+                        <span class="label-text">테두리 색상</span>
+                    </label>
+                    <input 
+                        id="node-border-color"
+                        type="color"
+                        class="input-bordered w-10 h-10" 
+                        bind:value={selectedNode.data.styleData.borderColor}
+                    />
+                </div>
+    
+
             </div>
 
-            <div class="form-control mb-4">
-                <label class="label" for="node-border-color">
-                    <span class="label-text">테두리 색상</span>
-                </label>
-                <input 
-                    id="node-border-color"
-                    type="color"
-                    class="input input-bordered w-full h-12" 
-                    bind:value={selectedNode.data.styleData.borderColor}
-                />
-            </div>
-
-            <div class="form-control mb-4">
-                <label class="label" for="node-border-style">
-                    <span class="label-text">테두리 스타일</span>
-                </label>
-                <select 
-                    id="node-border-style"
-                    class="select select-bordered w-full" 
-                    bind:value={selectedNode.data.styleData.borderStyle}
-                >
-                    <option value="solid">직선</option>
-                    <option value="dotted">점선</option>
-                    <option value="dashed">짧은선</option>
-                </select>
-            </div>
 
             <div class="form-control mb-4">
                 <label class="label" for="node-border-radius">
@@ -749,7 +760,7 @@
                 <input 
                     id="node-border-radius"
                     type="text"
-                    class="input input-bordered w-full h-12" 
+                    class="input input-bordered w-full" 
                     bind:value={selectedNode.data.styleData.borderRadius}
                 />
             </div>
@@ -761,7 +772,7 @@
         {/if}
 
         {#if selectedEdge && $isEditMode}
-        <div class="absolute right-0 top-0 w-80 h-full z-[4] bg-base-200 shadow-lg p-6 overflow-y-auto">
+        <div class="absolute right-0 top-0 w-[270px] h-full z-[4] bg-base-200 shadow-lg p-2 overflow-y-auto">
             <h2 class="text-xl font-bold mb-6">연결선 설정</h2>
 
             <div class="form-control mb-4">
@@ -807,29 +818,35 @@
                 </select>
             </div>
 
-            <div class="form-control mb-4">
-                <label class="label" for="edge-color">
-                    <span class="label-text">연결선 색상</span>
-                </label>
-                <input 
-                    id="edge-color"
-                    class="input input-bordered w-full" 
-                    type="color"
-                    bind:value={selectedEdge.data.styleData.color}
-                />
+            
+            <div class="flex items-center justify-start gap-2">
+
+                <div class="form-control mb-4">
+                    <label class="label" for="edge-width">
+                        <span class="label-text">연결선 두께</span>
+                    </label>
+                    <input 
+                        id="edge-width"
+                        class="input input-bordered w-full" 
+                        type="number"
+                        bind:value={selectedEdge.data.styleData.width}
+                    />
+                </div>
+                
+                <div class="form-control mb-4 flex flex-col justify-center items-center">
+                    <label class="label" for="edge-color">
+                        <span class="label-text">연결선 색상</span>
+                    </label>
+                    <input 
+                        id="edge-color"
+                        class="input-bordered w-10 h-10" 
+                        type="color"
+                        bind:value={selectedEdge.data.styleData.color}
+                    />
+                </div>
+
             </div>
 
-            <div class="form-control mb-4">
-                <label class="label" for="edge-width">
-                    <span class="label-text">연결선 두께</span>
-                </label>
-                <input 
-                    id="edge-width"
-                    class="input input-bordered w-full" 
-                    type="number"
-                    bind:value={selectedEdge.data.styleData.width}
-                />
-            </div>
 
             <div class="form-control mb-4">
                 <label class="label" for="edge-dasharray">

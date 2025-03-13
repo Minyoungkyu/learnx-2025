@@ -8,7 +8,7 @@
   import DnDProvider from '../../test3/DnDProvider2.svelte';
 
   let flow: any;
-  let isEditMode = writable(false);
+  let isEditMode = writable(true);
   let isFullscreen = $state(false);
   let flowContainer: HTMLElement;
   let flowContainerBackground: HTMLElement;
@@ -293,10 +293,10 @@
         </SvelteFlowProvider>
       </div>
       <div class="bg-white h-12 rounded-b-xl shadow-md flex flex-row justify-between items-center">
-        <div class="w-full pl-10 flex items-center font-bold text-sm">
+        <div class="w-full pl-6 flex items-center font-bold text-sm">
           <div>발 맞추어 천천히 따라가는 중학생 기초 파이썬</div>
         </div>
-        <div class="w-full h-full flex flex-row justify-end items-center pr-8 gap-4">
+        <div class="w-full h-full flex flex-row justify-end items-center pr-4 gap-2">
           <button class="btn btn-outline btn-sm bottom-0 right-0" onclick={toggleEditMode}>
             {#if $isEditMode}
               <i class="fa-regular fa-floppy-disk"></i>
