@@ -59,7 +59,7 @@
         needHeader = true;
       }
 
-      if (path == '/' || path == '/class' || path == '/learn' || path == '/learn2' || path.startsWith('/member') || path == '/me') {
+      if (path == '/' || path == '/class' || path == '/learn' || path == '/learn2' || path.startsWith('/member') || path == '/me' || path == '/home' || path == '/home/info') {
         needSideMenu = false;
       } else {
         needSideMenu = true;
@@ -90,7 +90,7 @@
 
   <div class="flex w-full justify-center">
     <div class="w-fit flex items-center justify-center gap-2 text-sm font-bold bg-gray-200 rounded-full px-2 py-1">
-      <a href="/" class="px-2 py-1 rounded-full hover:bg-gray-100 {$page.url.pathname === '/' ? 'bg-white' : ''}">홈</a>
+      <a href="/home" class="px-2 py-1 rounded-full hover:bg-gray-100 {$page.url.pathname === '/home' ? 'bg-white' : ''}">홈</a>
       <a href="/class" class="px-2 py-1 rounded-full hover:bg-gray-100 {$page.url.pathname === '/class' || $page.url.pathname.startsWith('/menu/lecture') ? 'bg-white' : ''}">클래스</a>
       <a href="#" class="px-2 py-1 rounded-full hover:bg-gray-100 {$page.url.pathname === '/coding' ? 'bg-white' : ''}">코딩 챌린지</a>
     </div>
